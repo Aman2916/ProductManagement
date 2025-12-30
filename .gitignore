@@ -10,7 +10,7 @@ npm-debug.log
 dist/
 build/
 
-# angular / react
+# angular 
 .angular/
 coverage/
 
@@ -18,3 +18,8 @@ coverage/
 logs/
 
 req.txt
+
+
+.angular/
+
+.vscode/
