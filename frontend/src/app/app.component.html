@@ -1,0 +1,94 @@
+<div>
+  <h1>Product Management</h1>
+
+  <form #productForm="ngForm" (ngSubmit)="saveProduct()">
+    <input
+      type="text"
+      [(ngModel)]="productName"
+      name="productName"
+      placeholder="Product Name"
+      required
+      #productNameRef="ngModel"
+    />
+    <div class="error" *ngIf="productNameRef.invalid && productNameRef.touched">
+      Product Name is required
+    </div>
+
+    <select
+      [(ngModel)]="category"
+      name="category"
+      required
+      #categoryRef="ngModel"
+    >
+      <option value="" disabled selected>Category</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Clothing">Clothing</option>
+      <option value="Books">Books</option>
+      <option value="Home">Home</option>
+      <option value="Sports">Sports</option>
+    </select>
+
+    <div class="error" *ngIf="categoryRef.invalid && categoryRef.touched">
+      Category is required
+    </div>
+
+    <input
+      type="number"
+      [(ngModel)]="price"
+      name="price"
+      placeholder="Price"
+      required
+      min="1"
+      #priceRef="ngModel"
+    />
+    <div class="error" *ngIf="priceRef.invalid && priceRef.touched">
+      Price must be greater than 0
+    </div>
+
+    <button type="submit" [disabled]="productForm.invalid">
+      {{ editingProductId ? "Update Product" : "Add Product" }}
+    </button>
+  </form>
+
+  <div *ngIf="message" class="message" [ngClass]="messageType">
+    {{ message }}
+  </div>
+
+  <h2>Product List</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Product Code</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.productName }}</td>
+        <td>{{ product.productCode }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price }}</td>
+
+        <td>
+          <button
+            *ngIf="product._id"
+            (click)="deleteProduct(product._id)"
+            id="delete"
+          >
+            Delete
+          </button>
+        </td>
+
+        <td>
+          <button (click)="editProduct(product)" id="edit">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
