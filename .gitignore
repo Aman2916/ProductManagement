@@ -1,0 +1,20 @@
+# common
+.env
+.DS_Store
+
+# node
+node_modules/
+npm-debug.log
+
+# build
+dist/
+build/
+
+# angular / react
+.angular/
+coverage/
+
+# backend
+logs/
+
+req.txt
